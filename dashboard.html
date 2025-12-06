@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Melamchi Water Alert</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <span class="water-icon">💧</span>
+                    <span class="brand-name">Melamchi Alert</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="history.html">History</a>
+                <a href="#" id="logout-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Welcome, <span id="user-name">User</span>!</h1>
+                <p>Your water supply dashboard for <strong id="user-location">Loading...</strong></p>
+            </div>
+
+            <!-- Current Status Card -->
+            <div class="status-card" id="status-card">
+                <div class="status-icon" id="status-icon">💧</div>
+                <div class="status-content">
+                    <h2 id="status-title">Checking Status...</h2>
+                    <p id="status-message">Please wait while we load your water supply status</p>
+                    <p class="status-time" id="status-time"></p>
+                </div>
+            </div>
+
+            <!-- Statistics Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-content">
+                        <h3 id="last-supply">Loading...</h3>
+                        <p>Last Water Supply</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔄</div>
+                    <div class="stat-content">
+                        <h3 id="frequency">Loading...</h3>
+                        <p>Average Frequency</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏰</div>
+                    <div class="stat-content">
+                        <h3 id="common-time">Loading...</h3>
+                        <p>Common Arrival Time</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <h3 id="total-events">Loading...</h3>
+                        <p>Total Events (Last 30 Days)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Events -->
+            <div class="recent-events">
+                <div class="section-header">
+                    <h2>Recent Water Arrivals</h2>
+                    <a href="history.html" class="btn btn-secondary">View Full History</a>
+                </div>
+                <div class="events-list" id="recent-events-list">
+                    <div class="loading">Loading recent events...</div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="actions-grid">
+                    <a href="history.html" class="action-card">
+                        <div class="action-icon">📊</div>
+                        <h3>View History</h3>
+                        <p>See all past water events</p>
+                    </a>
+                    <a href="#" class="action-card" onclick="refreshDashboard(); return false;">
+                        <div class="action-icon">🔄</div>
+                        <h3>Refresh Status</h3>
+                        <p>Update current information</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Melamchi Water Alert System</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
+

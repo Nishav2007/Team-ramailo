@@ -1,0 +1,302 @@
+/* ================================================
+   FORMS STYLESHEET
+   Registration, Login, and Form Elements
+   ================================================ */
+
+/* === FORM SECTION === */
+.form-section {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(135deg, var(--color-bg-light) 0%, #E0F2F7 100%);
+}
+
+.form-container {
+    background: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    width: 100%;
+    max-width: 500px;
+    margin: 0 var(--spacing-md);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-header h1 {
+    color: var(--color-8);
+    margin-bottom: var(--spacing-sm);
+}
+
+.form-header p {
+    color: var(--color-text-light);
+    font-size: 1rem;
+}
+
+/* === FORM ELEMENTS === */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--color-8);
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select {
+    padding: 0.75rem;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--color-5);
+    box-shadow: 0 0 0 3px rgba(37, 106, 115, 0.1);
+}
+
+.form-group input::placeholder {
+    color: var(--color-text-light);
+}
+
+.form-hint {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+}
+
+.error-message {
+    color: var(--color-error);
+    font-size: 0.875rem;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+.form-group.error input {
+    border-color: var(--color-error);
+}
+
+/* === SEARCHABLE DROPDOWN === */
+.searchable-dropdown {
+    position: relative;
+}
+
+.searchable-dropdown input[type="text"] {
+    padding: 0.75rem;
+    padding-right: 2.5rem;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.searchable-dropdown input[type="text"]:focus {
+    border-color: var(--color-5);
+    box-shadow: 0 0 0 3px rgba(37, 106, 115, 0.1);
+}
+
+.dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 250px;
+    overflow-y: auto;
+    background: white;
+    border: 2px solid var(--color-5);
+    border-top: none;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    display: none;
+}
+
+.dropdown-list.show {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background: var(--color-1);
+}
+
+.dropdown-item.selected {
+    background: var(--color-5);
+    color: white;
+}
+
+.dropdown-item.hidden {
+    display: none;
+}
+
+.dropdown-empty {
+    padding: var(--spacing-md);
+    text-align: center;
+    color: var(--color-text-light);
+    font-style: italic;
+}
+
+/* === FORM FOOTER === */
+.form-footer {
+    margin-top: var(--spacing-lg);
+    text-align: center;
+    color: var(--color-text-light);
+}
+
+.form-footer p {
+    margin-bottom: var(--spacing-xs);
+}
+
+.form-footer a {
+    color: var(--color-5);
+    font-weight: 600;
+}
+
+.form-footer a:hover {
+    color: var(--color-6);
+    text-decoration: underline;
+}
+
+/* === BUTTON STATES === */
+.btn:disabled,
+.btn.loading {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btn.loading::after {
+    content: "...";
+    animation: dots 1.5s infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: "."; }
+    40% { content: ".."; }
+    60%, 100% { content: "..."; }
+}
+
+/* === VALIDATION STYLES === */
+.form-group.success input {
+    border-color: var(--color-success);
+}
+
+.form-group.success .success-message {
+    display: block;
+    color: var(--color-success);
+    font-size: 0.875rem;
+}
+
+/* === PASSWORD STRENGTH INDICATOR === */
+.password-strength {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--color-border);
+    overflow: hidden;
+    margin-top: var(--spacing-xs);
+}
+
+.password-strength-bar {
+    height: 100%;
+    width: 0%;
+    transition: all 0.3s ease;
+}
+
+.password-strength-bar.weak {
+    width: 33%;
+    background: var(--color-error);
+}
+
+.password-strength-bar.medium {
+    width: 66%;
+    background: var(--color-warning);
+}
+
+.password-strength-bar.strong {
+    width: 100%;
+    background: var(--color-success);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .form-container {
+        padding: var(--spacing-lg);
+    }
+    
+    .form-section {
+        padding: var(--spacing-md) 0;
+    }
+}
+
+/* === CHECKBOX & RADIO === */
+.form-checkbox,
+.form-radio {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.form-checkbox input[type="checkbox"],
+.form-radio input[type="radio"] {
+    width: auto;
+    margin: 0;
+}
+
+/* === SELECT DROPDOWN === */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    padding-right: 2.5rem;
+}
+
+/* === INPUT ICONS === */
+.input-group {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-light);
+}
+
+.input-group input {
+    padding-left: 2.5rem;
+}
+

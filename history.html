@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water History - Melamchi Water Alert</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <span class="water-icon">💧</span>
+                    <span class="brand-name">Melamchi Alert</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="history.html" class="active">History</a>
+                <a href="#" id="logout-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- History Content -->
+    <section class="history-section">
+        <div class="container">
+            <div class="page-header">
+                <h1>Water Supply History</h1>
+                <p>Complete record for <strong id="user-location">Loading...</strong></p>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <div class="filter-group">
+                    <label for="filter-period">Time Period:</label>
+                    <select id="filter-period" class="filter-select">
+                        <option value="7">Last 7 Days</option>
+                        <option value="30" selected>Last 30 Days</option>
+                        <option value="90">Last 90 Days</option>
+                        <option value="all">All Time</option>
+                    </select>
+                </div>
+                <button onclick="exportHistory()" class="btn btn-secondary">
+                    📥 Export Data
+                </button>
+            </div>
+
+            <!-- Statistics Summary -->
+            <div class="history-stats">
+                <div class="history-stat-card">
+                    <h3 id="total-events-history">0</h3>
+                    <p>Total Events</p>
+                </div>
+                <div class="history-stat-card">
+                    <h3 id="avg-frequency">-</h3>
+                    <p>Average Gap</p>
+                </div>
+                <div class="history-stat-card">
+                    <h3 id="most-common-day">-</h3>
+                    <p>Most Common Day</p>
+                </div>
+                <div class="history-stat-card">
+                    <h3 id="most-common-hour">-</h3>
+                    <p>Most Common Hour</p>
+                </div>
+            </div>
+
+            <!-- History Table -->
+            <div class="table-container">
+                <table class="history-table" id="history-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Day</th>
+                            <th>Time</th>
+                            <th>Location</th>
+                            <th>Days Since Last</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-tbody">
+                        <tr>
+                            <td colspan="6" class="loading-row">Loading history data...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <div class="empty-icon">📭</div>
+                <h3>No Water Events Yet</h3>
+                <p>No water arrivals have been recorded for your area in the selected time period.</p>
+                <p>You'll receive an email alert when water arrives!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Melamchi Water Alert System</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/history.js"></script>
+</body>
+</html>
+

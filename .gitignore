@@ -1,0 +1,56 @@
+# Melamchi Water Alert System - Git Ignore
+
+# Configuration files with sensitive data
+php/config.php
+
+# Backup files
+*.bak
+*.backup
+*.sql.bak
+database/backups/*
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*~
+
+# Logs
+*.log
+error_log
+access_log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# PHPMailer (if you download it later)
+php/PHPMailer/
+
+# User uploads (if you add file upload feature)
+uploads/
+user_files/
+
+# Cache
+cache/
+*.cache
+
+# Environment files
+.env
+.env.local
+
+# Node modules (if you add npm later)
+node_modules/
+package-lock.json
+
+# Composer (if you add PHP dependencies)
+vendor/
+composer.lock
+

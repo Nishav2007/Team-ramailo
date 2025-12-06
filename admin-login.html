@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Melamchi Water Alert</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-admin">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <span class="water-icon">💧</span>
+                    <span class="brand-name">Melamchi Alert - Admin</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="login.html">User Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Login Form -->
+    <section class="form-section">
+        <div class="form-container">
+            <div class="form-header admin-header">
+                <div class="admin-badge">🔒 ADMIN ACCESS</div>
+                <h1>Admin Panel Login</h1>
+                <p>Authorized personnel only</p>
+            </div>
+
+            <div id="alert-message" class="alert" style="display: none;"></div>
+
+            <form id="adminLoginForm" class="form" method="POST">
+                <div class="form-group">
+                    <label for="username">Admin Username</label>
+                    <input type="text" id="username" name="username" required 
+                           placeholder="Enter admin username">
+                    <span class="error-message" id="username-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Admin Password</label>
+                    <input type="password" id="password" name="password" required 
+                           placeholder="Enter admin password">
+                    <span class="error-message" id="password-error"></span>
+                </div>
+
+                <button type="submit" class="btn btn-admin btn-block" id="admin-login-btn">
+                    🔐 Login to Admin Panel
+                </button>
+            </form>
+
+            <div class="form-footer">
+                <p><a href="login.html">← Back to User Login</a></p>
+            </div>
+
+            <div class="admin-info">
+                <p><strong>Default Admin Credentials (for testing):</strong></p>
+                <p>Username: <code>admin</code></p>
+                <p>Password: <code>admin123</code></p>
+                <p class="warning-text">⚠️ Change these credentials in production!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Melamchi Water Alert System</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/validation.js"></script>
+    <script src="js/admin-login.js"></script>
+</body>
+</html>
+

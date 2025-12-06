@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Melamchi Water Alert</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-admin">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="water-icon">💧</span>
+                <span class="brand-name">Melamchi Alert - Admin Panel</span>
+            </div>
+            <div class="nav-links">
+                <span class="admin-user">👤 <span id="admin-username">Admin</span></span>
+                <a href="#" id="admin-logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Dashboard -->
+    <section class="admin-section">
+        <div class="container">
+            <div class="admin-header">
+                <h1>Water Arrival Control Panel</h1>
+                <p>Mark water arrivals and manage notifications</p>
+            </div>
+
+            <!-- Alert Messages -->
+            <div id="alert-message" class="alert" style="display: none;"></div>
+
+            <!-- Main Control Card -->
+            <div class="control-card">
+                <h2>🚰 Mark Water Arrival</h2>
+                <p class="control-description">
+                    Select an area and click the button below to mark water as arrived. 
+                    This will automatically send email notifications to all users in that area.
+                </p>
+
+                <form id="waterArrivalForm" class="admin-form">
+                    <div class="form-group">
+                        <label for="location-search">Select Location</label>
+                        <div class="searchable-dropdown">
+                            <input type="text" id="location-search" 
+                                   placeholder="🔍 Search location (e.g., Chabahil, Koteshwor)" 
+                                   autocomplete="off">
+                            <input type="hidden" id="location_id" name="location_id" required>
+                            <div id="location-dropdown" class="dropdown-list"></div>
+                        </div>
+                        <span class="error-message" id="location-error"></span>
+                    </div>
+
+                    <div class="selected-location" id="selected-location" style="display: none;">
+                        <h3>Selected Area:</h3>
+                        <div class="location-badge" id="location-badge"></div>
+                    </div>
+
+                    <div class="current-time">
+                        <strong>Current Time:</strong> <span id="current-time"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-admin btn-large btn-block" id="mark-water-btn">
+                        💧 Mark Water as Arrived & Send Alerts
+                    </button>
+                </form>
+
+                <div class="notification-info">
+                    <p><strong>What happens when you click this button?</strong></p>
+                    <ul>
+                        <li>✅ Water arrival event is recorded in the database</li>
+                        <li>📧 Automatic email alerts are sent to all users in the selected area</li>
+                        <li>📊 Event is added to historical data</li>
+                        <li>⚡ Users receive instant notifications</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="admin-stats">
+                <h2>System Statistics</h2>
+                <div class="stats-grid">
+                    <div class="admin-stat-card">
+                        <div class="stat-icon">👥</div>
+                        <h3 id="total-users">Loading...</h3>
+                        <p>Total Registered Users</p>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="stat-icon">📍</div>
+                        <h3 id="total-locations">Loading...</h3>
+                        <p>Covered Locations</p>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="stat-icon">💧</div>
+                        <h3 id="total-events-today">Loading...</h3>
+                        <p>Events Today</p>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="stat-icon">📧</div>
+                        <h3 id="emails-sent-today">Loading...</h3>
+                        <p>Emails Sent Today</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Events -->
+            <div class="recent-events-admin">
+                <h2>Recent Water Arrival Events</h2>
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Location</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Emails Sent</th>
+                                <th>Recorded By</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-events-tbody">
+                            <tr>
+                                <td colspan="6" class="loading-row">Loading recent events...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Users by Location -->
+            <div class="users-by-location">
+                <h2>Users by Location</h2>
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Location</th>
+                                <th>Registered Users</th>
+                                <th>Last Water Event</th>
+                                <th>Quick Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-by-location-tbody">
+                            <tr>
+                                <td colspan="4" class="loading-row">Loading location data...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Melamchi Water Alert System - Admin Panel</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/searchable-dropdown.js"></script>
+    <script src="js/admin-panel.js"></script>
+</body>
+</html>
+
