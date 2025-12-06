@@ -142,28 +142,92 @@ $activeTab = $_GET['tab'] ?? 'water';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - GoodDream</title>
     <link rel="stylesheet" href="gooddream-theme.css">
-    <meta http-equiv="refresh" content="30"><!-- Auto-refresh every 30 seconds -->
+    <meta http-equiv="refresh" content="30">
+    <style>
+        .tab-button {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            color: #666;
+        }
+        .tab-button.active {
+            background: var(--gradient-1);
+            color: white;
+            border-radius: 10px 10px 0 0;
+            border-bottom-color: var(--teal-primary);
+        }
+        .tab-button:hover:not(.active) {
+            color: var(--teal-primary);
+            background: rgba(20, 184, 166, 0.05);
+        }
+        .location-card {
+            padding: 1.5rem;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+        .location-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(20, 184, 166, 0.15);
+        }
+        .location-card.flowing {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+        .location-card.not-flowing {
+            border-color: #e5e7eb;
+        }
+        .location-status {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .location-status.flowing {
+            background: #10b981;
+            color: white;
+        }
+        .location-status.not-flowing {
+            background: #ef4444;
+            color: white;
+        }
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" style="background: rgba(255, 255, 255, 0.98);">
         <div class="container">
             <a href="admin-panel.php" class="navbar-brand">GoodDream Admin</a>
             <div class="navbar-links">
-                <span style="color: #333; font-weight: 600;">Admin: <?= htmlspecialchars($_SESSION['admin_username']) ?></span>
-                <a href="logout.php">Logout</a>
+                <span style="color: #666; font-weight: 500;">👤 <?= htmlspecialchars($_SESSION['admin_username']) ?></span>
+                <a href="logout.php" style="color: #ef4444;">Logout</a>
             </div>
         </div>
     </nav>
 
     <div class="container">
         <!-- Header -->
-        <div class="text-center" style="margin: 2rem 0;">
-            <h1 style="background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Water Flow Control Panel</h1>
+        <div class="text-center" style="margin-bottom: 2rem;">
+            <div class="css-icon icon-drop" style="margin: 0 auto 1.5rem;"></div>
+            <h1 style="background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Water Control Panel</h1>
             <p style="font-size: 1.1rem; color: #666;">Manage water flow across all locations</p>
             <div style="margin-top: 1rem;">
-                <span class="live-badge">
-                    <span class="pulse-dot"></span>
+                <span class="live-badge" style="background: #fef3c7; color: #92400e;">
+                    <span class="pulse-dot" style="background: #f59e0b;"></span>
                     LIVE
                 </span>
                 <span style="font-size: 0.85rem; color: #666; margin-left: 0.5rem;">
@@ -183,40 +247,40 @@ $activeTab = $_GET['tab'] ?? 'water';
         <!-- Statistics -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="icon">👥</div>
+                <div class="css-icon icon-user" style="margin: 0 auto 1rem; transform: scale(0.6);"></div>
                 <h3><?= $totalUsers ?></h3>
                 <p>Registered Users</p>
             </div>
             <div class="stat-card">
-                <div class="icon">📍</div>
+                <div class="css-icon icon-map" style="margin: 0 auto 1rem; transform: scale(0.6);"></div>
                 <h3><?= $totalLocations ?></h3>
                 <p>Total Locations</p>
             </div>
             <div class="stat-card">
-                <div class="icon">💧</div>
+                <div class="css-icon icon-drop" style="margin: 0 auto 1rem; transform: scale(0.6);"></div>
                 <h3><?= $flowingCount ?></h3>
                 <p>Locations Flowing</p>
             </div>
             <div class="stat-card">
-                <div class="icon">📅</div>
+                <div class="css-icon icon-chart" style="margin: 0 auto 1rem; transform: scale(0.6);"></div>
                 <h3><?= $eventsToday ?></h3>
                 <p>Events Today</p>
             </div>
         </div>
 
         <!-- Tab Navigation -->
-        <div style="display: flex; gap: 1rem; margin: 2rem 0; border-bottom: 2px solid #E0F2FE;">
+        <div style="display: flex; gap: 1rem; margin: 2rem 0; border-bottom: 2px solid rgba(20, 184, 166, 0.1);">
             <button 
                 onclick="showTab('water')" 
                 id="tab-water"
-                style="padding: 1rem 2rem; background: <?= $activeTab === 'water' ? '#256A73' : 'transparent' ?>; color: <?= $activeTab === 'water' ? 'white' : '#256A73' ?>; border: none; border-bottom: 3px solid <?= $activeTab === 'water' ? '#256A73' : 'transparent' ?>; cursor: pointer; font-weight: 600; font-size: 1rem; transition: all 0.3s;"
+                class="tab-button <?= $activeTab === 'water' ? 'active' : '' ?>"
             >
                 💧 Water Flow Control
             </button>
             <button 
                 onclick="showTab('users')" 
                 id="tab-users"
-                style="padding: 1rem 2rem; background: <?= $activeTab === 'users' ? '#256A73' : 'transparent' ?>; color: <?= $activeTab === 'users' ? 'white' : '#256A73' ?>; border: none; border-bottom: 3px solid <?= $activeTab === 'users' ? '#256A73' : 'transparent' ?>; cursor: pointer; font-weight: 600; font-size: 1rem; transition: all 0.3s;"
+                class="tab-button <?= $activeTab === 'users' ? 'active' : '' ?>"
             >
                 👥 User Management
             </button>
@@ -547,24 +611,16 @@ $activeTab = $_GET['tab'] ?? 'water';
             document.getElementById('users-tab').style.display = 'none';
             
             // Remove active class from all buttons
-            document.getElementById('tab-water').style.background = 'transparent';
-            document.getElementById('tab-water').style.color = '#256A73';
-            document.getElementById('tab-water').style.borderBottomColor = 'transparent';
-            document.getElementById('tab-users').style.background = 'transparent';
-            document.getElementById('tab-users').style.color = '#256A73';
-            document.getElementById('tab-users').style.borderBottomColor = 'transparent';
+            document.getElementById('tab-water').classList.remove('active');
+            document.getElementById('tab-users').classList.remove('active');
             
             // Show selected tab
             if (tabName === 'water') {
                 document.getElementById('water-tab').style.display = 'block';
-                document.getElementById('tab-water').style.background = '#256A73';
-                document.getElementById('tab-water').style.color = 'white';
-                document.getElementById('tab-water').style.borderBottomColor = '#256A73';
+                document.getElementById('tab-water').classList.add('active');
             } else if (tabName === 'users') {
                 document.getElementById('users-tab').style.display = 'block';
-                document.getElementById('tab-users').style.background = '#256A73';
-                document.getElementById('tab-users').style.color = 'white';
-                document.getElementById('tab-users').style.borderBottomColor = '#256A73';
+                document.getElementById('tab-users').classList.add('active');
             }
         }
 
