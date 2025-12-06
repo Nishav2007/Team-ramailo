@@ -10,7 +10,30 @@ require_once 'config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoodDream - Melamchi Water Alert Solution</title>
+    <link rel="stylesheet" href="gooddream-theme.css">
     <style>
+        /* Additional styles for homepage hero section */
+        .solution-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(20, 184, 166, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .solution-card:hover::after {
+            left: 100%;
+        }
+    </style>
+</head>
         * {
             margin: 0;
             padding: 0;
@@ -420,22 +443,22 @@ require_once 'config.php';
             <p class="section-text">GoodDream provides a comprehensive water alert system for Melamchi, ensuring you never miss water supply in your area through innovative technology and real-time monitoring.</p>
             <div class="solution-grid">
                 <div class="solution-card">
-                    <div style="font-size: 3.5rem; margin-bottom: 1rem;">📧</div>
+                    <div class="css-icon icon-email"></div>
                     <h3>Instant Alerts</h3>
                     <p>Receive immediate email notifications when water arrives in your specific location</p>
                 </div>
                 <div class="solution-card">
-                    <div style="font-size: 3.5rem; margin-bottom: 1rem;">💧</div>
+                    <div class="css-icon icon-drop"></div>
                     <h3>Live Status</h3>
                     <p>Real-time water flow monitoring with auto-updating dashboard every 30 seconds</p>
                 </div>
                 <div class="solution-card">
-                    <div style="font-size: 3.5rem; margin-bottom: 1rem;">📊</div>
+                    <div class="css-icon icon-chart"></div>
                     <h3>History Tracking</h3>
                     <p>Complete water supply records to analyze patterns and plan ahead</p>
                 </div>
                 <div class="solution-card">
-                    <div style="font-size: 3.5rem; margin-bottom: 1rem;">🗺️</div>
+                    <div class="css-icon icon-map"></div>
                     <h3>Location-Based</h3>
                     <p>Targeted alerts only for your registered area across 42 locations</p>
                 </div>

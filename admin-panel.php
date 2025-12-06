@@ -140,17 +140,17 @@ $activeTab = $_GET['tab'] ?? 'water';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - <?= SITE_NAME ?></title>
-    <link rel="stylesheet" href="style.css">
+    <title>Admin Panel - GoodDream</title>
+    <link rel="stylesheet" href="gooddream-theme.css">
     <meta http-equiv="refresh" content="30"><!-- Auto-refresh every 30 seconds -->
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar" style="background: #0A2A2E;">
+    <nav class="navbar">
         <div class="container">
-            <a href="admin-panel.php" class="navbar-brand">🔒 Admin Panel</a>
+            <a href="admin-panel.php" class="navbar-brand">GoodDream Admin</a>
             <div class="navbar-links">
-                <span style="color: white;">👤 <?= htmlspecialchars($_SESSION['admin_username']) ?></span>
+                <span style="color: #333; font-weight: 600;">Admin: <?= htmlspecialchars($_SESSION['admin_username']) ?></span>
                 <a href="logout.php">Logout</a>
             </div>
         </div>
@@ -159,11 +159,11 @@ $activeTab = $_GET['tab'] ?? 'water';
     <div class="container">
         <!-- Header -->
         <div class="text-center" style="margin: 2rem 0;">
-            <h1>Water Arrival Control Panel</h1>
+            <h1 style="background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Water Flow Control Panel</h1>
             <p style="font-size: 1.1rem; color: #666;">Manage water flow across all locations</p>
             <div style="margin-top: 1rem;">
-                <span class="live-badge" style="background: #FEF3C7; color: #92400E;">
-                    <span class="pulse-dot" style="background: #F59E0B;"></span>
+                <span class="live-badge">
+                    <span class="pulse-dot"></span>
                     LIVE
                 </span>
                 <span style="font-size: 0.85rem; color: #666; margin-left: 0.5rem;">

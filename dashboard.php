@@ -58,7 +58,6 @@ $eventCount = $stmt->get_result()->fetch_assoc()['count'];
 
 // Determine status display priority
 $statusClass = 'no-water';
-$statusIcon = '❌';
 $statusTitle = 'No Recent Water Supply';
 $statusMessage = 'No water events recorded recently';
 $statusTime = 'You will receive notifications when water arrives';
@@ -66,7 +65,6 @@ $statusTime = 'You will receive notifications when water arrives';
 if ($waterStatus === 'flowing') {
     // PRIORITY 1: Water is flowing RIGHT NOW
     $statusClass = 'flowing';
-    $statusIcon = '💧';
     $statusTitle = 'Water Flowing Now!';
     $statusMessage = "Melamchi water is currently flowing in {$location_name}";
     if ($statusUpdated) {
@@ -77,7 +75,6 @@ if ($waterStatus === 'flowing') {
 } elseif ($latestEvent) {
     // PRIORITY 2: Recent water event exists
     $statusClass = 'available';
-    $statusIcon = '💧';
     $statusTitle = 'Water Available!';
     $statusMessage = "Water arrived in {$location_name}";
     $statusTime = 'Last arrival: ' . date('M j, Y \a\t g:i A', strtotime($latestEvent['arrival_date'] . ' ' . $latestEvent['arrival_time']));
@@ -88,15 +85,15 @@ if ($waterStatus === 'flowing') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - <?= SITE_NAME ?></title>
-    <link rel="stylesheet" href="style.css">
+    <title>Dashboard - GoodDream</title>
+    <link rel="stylesheet" href="gooddream-theme.css">
     <meta http-equiv="refresh" content="30"><!-- Auto-refresh every 30 seconds -->
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <a href="index.php" class="navbar-brand">💧 <?= SITE_NAME ?></a>
+            <a href="index.php" class="navbar-brand">GoodDream</a>
             <div class="navbar-links">
                 <a href="dashboard.php">Dashboard</a>
                 <a href="history.php">History</a>
@@ -108,7 +105,7 @@ if ($waterStatus === 'flowing') {
     <div class="container">
         <!-- Header -->
         <div class="text-center" style="margin: 2rem 0;">
-            <h1>Welcome, <?= htmlspecialchars($user_name) ?>!</h1>
+            <h1 style="background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Welcome, <?= htmlspecialchars($user_name) ?>!</h1>
             <p style="font-size: 1.1rem; color: #666;">
                 Water supply dashboard for <strong><?= htmlspecialchars($location_name) ?></strong>
             </p>
@@ -125,7 +122,13 @@ if ($waterStatus === 'flowing') {
 
         <!-- Main Status Card -->
         <div class="status-card <?= $statusClass ?>">
-            <div class="icon"><?= $statusIcon ?></div>
+            <div style="margin-bottom: 1.5rem;">
+                <?php if ($waterStatus === 'flowing'): ?>
+                    <div class="css-icon icon-drop"></div>
+                <?php else: ?>
+                    <div class="css-icon icon-wave"></div>
+                <?php endif; ?>
+            </div>
             <h2><?= $statusTitle ?></h2>
             <p style="font-size: 1.2rem; margin-bottom: 0.5rem;"><?= $statusMessage ?></p>
             <p style="font-size: 0.95rem; color: #666;"><?= $statusTime ?></p>
@@ -134,17 +137,23 @@ if ($waterStatus === 'flowing') {
         <!-- Statistics -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="icon">📅</div>
+                <div class="css-icon" style="width: 50px; height: 50px; margin: 0 auto 0.5rem;">
+                    <div style="width: 40px; height: 40px; border: 4px solid var(--teal-primary); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--teal-primary);">
+                        <?= $latestEvent ? date('j', strtotime($latestEvent['arrival_date'])) : '-' ?>
+                    </div>
+                </div>
                 <h3><?= $latestEvent ? date('M j', strtotime($latestEvent['arrival_date'])) : 'N/A' ?></h3>
                 <p>Last Water Supply</p>
             </div>
             <div class="stat-card">
-                <div class="icon">🔄</div>
+                <div class="css-icon icon-chart" style="width: 50px; height: 40px; margin: 0 auto 1rem;"></div>
                 <h3><?= $eventCount > 1 ? 'Every ' . round(30 / $eventCount, 1) . ' days' : 'N/A' ?></h3>
                 <p>Average Frequency</p>
             </div>
             <div class="stat-card">
-                <div class="icon">📊</div>
+                <div style="width: 50px; height: 50px; margin: 0 auto 0.5rem; background: var(--gradient-1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; color: white;">
+                    <?= $eventCount ?>
+                </div>
                 <h3><?= $eventCount ?></h3>
                 <p>Events (Last 30 Days)</p>
             </div>
@@ -153,21 +162,21 @@ if ($waterStatus === 'flowing') {
         <!-- Recent Events -->
         <?php if (!empty($recentEvents)): ?>
             <div class="card">
-                <h2>Recent Water Arrivals</h2>
-                <table>
-                    <thead>
+                <h2 style="color: var(--teal-dark); margin-bottom: 1.5rem;">Recent Water Arrivals</h2>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="background: var(--gradient-2);">
                         <tr>
-                            <th>Date</th>
-                            <th>Day</th>
-                            <th>Time</th>
+                            <th style="padding: 1rem; text-align: left; color: white; border-radius: 8px 0 0 0;">Date</th>
+                            <th style="padding: 1rem; text-align: left; color: white;">Day</th>
+                            <th style="padding: 1rem; text-align: left; color: white; border-radius: 0 8px 0 0;">Time</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($recentEvents as $event): ?>
-                            <tr>
-                                <td><?= date('M j, Y', strtotime($event['arrival_date'])) ?></td>
-                                <td><?= date('l', strtotime($event['arrival_date'])) ?></td>
-                                <td><?= date('g:i A', strtotime($event['arrival_time'])) ?></td>
+                            <tr style="border-bottom: 1px solid #e0f2fe;">
+                                <td style="padding: 1rem;"><?= date('M j, Y', strtotime($event['arrival_date'])) ?></td>
+                                <td style="padding: 1rem;"><?= date('l', strtotime($event['arrival_date'])) ?></td>
+                                <td style="padding: 1rem; font-weight: 600; color: var(--teal-primary);"><?= date('g:i A', strtotime($event['arrival_time'])) ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -176,22 +185,30 @@ if ($waterStatus === 'flowing') {
         <?php endif; ?>
 
         <!-- Quick Actions -->
-        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
-            <a href="history.php" class="btn btn-primary">📊 View Full History</a>
-            <a href="dashboard.php" class="btn btn-success">🔄 Refresh Now</a>
+        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+            <a href="history.php" class="btn btn-primary">View Full History</a>
+            <a href="dashboard.php" class="btn btn-outline">Refresh Now</a>
         </div>
     </div>
 
-    <!-- Auto-refresh indicator -->
+    <!-- Auto-refresh countdown -->
     <script>
-        // Show when page will refresh
         let seconds = 30;
         setInterval(() => {
             seconds--;
             if (seconds <= 0) seconds = 30;
-            document.title = `(${seconds}s) Dashboard - <?= SITE_NAME ?>`;
+            document.title = `(${seconds}s) Dashboard - GoodDream`;
         }, 1000);
+
+        // Smooth scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 2px 20px rgba(20, 184, 166, 0.2)';
+            } else {
+                navbar.style.boxShadow = '0 2px 20px rgba(20, 184, 166, 0.1)';
+            }
+        });
     </script>
 </body>
 </html>
-
