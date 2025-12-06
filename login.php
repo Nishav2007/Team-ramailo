@@ -54,14 +54,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - <?= SITE_NAME ?></title>
-    <link rel="stylesheet" href="style.css">
+    <title>Login - GoodDream</title>
+    <link rel="stylesheet" href="gooddream-theme.css">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <a href="index.php" class="navbar-brand">💧 <?= SITE_NAME ?></a>
+            <a href="index.php" class="navbar-brand">GoodDream</a>
             <div class="navbar-links">
                 <a href="index.php">Home</a>
                 <a href="register.php">Register</a>
@@ -71,8 +71,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Login Form -->
     <div class="form-container">
-        <h1 class="text-center">Welcome Back</h1>
-        <p class="text-center" style="color: #666; margin-bottom: 2rem;">Login to view your dashboard</p>
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <div class="css-icon icon-user"></div>
+        </div>
+        
+        <h1 class="text-center" style="background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Welcome Back</h1>
+        <p class="text-center" style="color: #666; margin-bottom: 2rem;">Login to view your water alerts dashboard</p>
 
         <?php if ($error): ?>
             <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
@@ -85,24 +89,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="POST" action="login.php">
             <div class="form-group">
                 <label>Email Address</label>
-                <input type="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required autofocus>
+                <input type="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" placeholder="your@email.com" required autofocus>
             </div>
 
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" name="password" required>
+                <input type="password" name="password" placeholder="Enter your password" required>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block">Login</button>
+            <button type="submit" class="btn btn-primary btn-block">Login to Dashboard</button>
         </form>
 
-        <p class="text-center" style="margin-top: 1.5rem;">
-            Don't have an account? <a href="register.php" style="color: #256A73; font-weight: 600;">Register here</a>
-        </p>
-        <p class="text-center" style="margin-top: 0.5rem;">
-            <a href="admin-login.php" style="color: #F59E0B; font-weight: 600;">Admin Login</a>
-        </p>
+        <div style="margin-top: 1.5rem; text-align: center;">
+            <p style="color: #666; margin-bottom: 0.5rem;">
+                Don't have an account? <a href="register.php" style="color: var(--teal-primary); font-weight: 600; text-decoration: none;">Register here</a>
+            </p>
+            <p style="color: #666;">
+                <a href="admin-login.php" style="color: #f59e0b; font-weight: 600; text-decoration: none;">Admin Login</a>
+            </p>
+        </div>
     </div>
+
+    <script>
+        // Smooth scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 2px 20px rgba(20, 184, 166, 0.2)';
+            } else {
+                navbar.style.boxShadow = '0 2px 20px rgba(20, 184, 166, 0.1)';
+            }
+        });
+    </script>
 </body>
 </html>
-

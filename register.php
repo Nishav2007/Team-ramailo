@@ -57,14 +57,14 @@ while ($row = $result->fetch_assoc()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - <?= SITE_NAME ?></title>
-    <link rel="stylesheet" href="style.css">
+    <title>Register - GoodDream</title>
+    <link rel="stylesheet" href="gooddream-theme.css">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <a href="index.php" class="navbar-brand">💧 <?= SITE_NAME ?></a>
+            <a href="index.php" class="navbar-brand">GoodDream</a>
             <div class="navbar-links">
                 <a href="index.php">Home</a>
                 <a href="login.php">Login</a>
@@ -74,8 +74,12 @@ while ($row = $result->fetch_assoc()) {
 
     <!-- Registration Form -->
     <div class="form-container">
-        <h1 class="text-center">Create Your Account</h1>
-        <p class="text-center" style="color: #666; margin-bottom: 2rem;">Get water alerts for your area</p>
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <div class="css-icon icon-drop"></div>
+        </div>
+        
+        <h1 class="text-center" style="background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Create Your Account</h1>
+        <p class="text-center" style="color: #666; margin-bottom: 2rem;">Join GoodDream and never miss water alerts</p>
 
         <?php if ($error): ?>
             <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
@@ -88,18 +92,18 @@ while ($row = $result->fetch_assoc()) {
         <form method="POST" action="register.php">
             <div class="form-group">
                 <label>Full Name</label>
-                <input type="text" name="name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" required>
+                <input type="text" name="name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" placeholder="Enter your full name" required autofocus>
             </div>
 
             <div class="form-group">
                 <label>Email Address</label>
-                <input type="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
+                <input type="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" placeholder="your@email.com" required>
             </div>
 
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" name="password" required>
-                <small style="color: #666;">Minimum 6 characters</small>
+                <input type="password" name="password" placeholder="Minimum 6 characters" required>
+                <small style="color: #666; font-size: 0.85rem;">Use a strong password with letters and numbers</small>
             </div>
 
             <div class="form-group">
@@ -114,13 +118,24 @@ while ($row = $result->fetch_assoc()) {
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn btn-primary btn-block">Create Account</button>
         </form>
 
-        <p class="text-center" style="margin-top: 1.5rem;">
-            Already have an account? <a href="login.php" style="color: #256A73; font-weight: 600;">Login here</a>
+        <p class="text-center" style="margin-top: 1.5rem; color: #666;">
+            Already have an account? <a href="login.php" style="color: var(--teal-primary); font-weight: 600; text-decoration: none;">Login here</a>
         </p>
     </div>
+
+    <script>
+        // Smooth scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 2px 20px rgba(20, 184, 166, 0.2)';
+            } else {
+                navbar.style.boxShadow = '0 2px 20px rgba(20, 184, 166, 0.1)';
+            }
+        });
+    </script>
 </body>
 </html>
-
