@@ -34,7 +34,93 @@ require_once 'config.php';
         }
     </style>
 </head>
-        * {
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">GoodDream</div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#solution">Solution</a></li>
+                <li><a href="register.php">Register</a></li>
+                <li><a href="login.php">Login</a></li>
+                <li><a href="admin-login.php">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero-split" id="home">
+        <div class="split-left">
+            <div class="hero-content">
+                <h1 class="hero-title">Never Miss Melamchi Water Again</h1>
+                <p class="hero-subtitle">Real-time water flow monitoring and instant notifications for your area. Stay informed, stay prepared.</p>
+                <div class="hero-buttons">
+                    <a href="register.php" class="btn btn-primary">Get Started Free</a>
+                    <a href="login.php" class="btn btn-outline">Login</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="mini-stat">
+                        <div class="mini-stat-number">42</div>
+                        <div class="mini-stat-label">Locations</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="mini-stat-number">Live</div>
+                        <div class="mini-stat-label">Updates</div>
+                    </div>
+                    <div class="mini-stat">
+                        <div class="mini-stat-number">24/7</div>
+                        <div class="mini-stat-label">Monitoring</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="split-right">
+            <div class="hero-visual">
+                <div class="water-wave wave-1"></div>
+                <div class="water-wave wave-2"></div>
+                <div class="water-wave wave-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="solution" id="solution">
+        <div class="container">
+            <h2 class="section-title">Our Solution</h2>
+            <p class="section-text">GoodDream provides a comprehensive water alert system for Melamchi, ensuring you never miss water supply in your area through innovative technology and real-time monitoring.</p>
+            <div class="solution-grid">
+                <div class="solution-card">
+                    <div class="css-icon icon-email"></div>
+                    <h3>Instant Alerts</h3>
+                    <p>Receive immediate email notifications when water arrives in your specific location</p>
+                </div>
+                <div class="solution-card">
+                    <div class="css-icon icon-drop"></div>
+                    <h3>Live Status</h3>
+                    <p>Real-time water flow monitoring with auto-updating dashboard every 30 seconds</p>
+                </div>
+                <div class="solution-card">
+                    <div class="css-icon icon-chart"></div>
+                    <h3>History Tracking</h3>
+                    <p>Complete water supply records to analyze patterns and plan ahead</p>
+                </div>
+                <div class="solution-card">
+                    <div class="css-icon icon-map"></div>
+                    <h3>Location-Based</h3>
+                    <p>Targeted alerts only for your registered area across 42 locations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <?= date('Y') ?> GoodDream - Melamchi Water Alert System. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; opacity: 0.8;">Built with 💧 for Kathmandu community</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -477,6 +563,38 @@ require_once 'config.php';
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 2px 20px rgba(20, 184, 166, 0.2)';
+            } else {
+                navbar.style.boxShadow = '0 2px 20px rgba(20, 184, 166, 0.1)';
+            }
+        });
+
+        // Parallax effect for hero visual
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroVisual = document.querySelector('.hero-visual');
+            if (heroVisual && scrolled < window.innerHeight) {
+                heroVisual.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
